@@ -29,7 +29,10 @@ Route::prefix('')->group(function () {
     Route::get('delete-product-cart/{rowId}','Client\CartController@delete_product_cart')->name('delete-product-cart');
 
     //checkout
+    Route::get('checkout','Client\CheckoutController@checkout')->name('checkout');
     Route::get('login-checkout','Client\CheckoutController@login_checkout')->name('login-checkout');
+    Route::post('add-customer','Client\CheckoutController@add_customer')->name('add-customer');
+    Route::post('login-customer','Client\CheckoutController@login_customer')->name('login-customer');
 
 });
 // admin
