@@ -15,7 +15,15 @@ class HomeController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    
+    public function AuthLogin(){
+        $admin_id=Session::get('admin_id');
+        if($admin_id){
+            return redirect()->route('dashboard');
+        }
+        else{
+            return redirect()->route('admin')->send();
+        }
+    }
     public function index()
     {
         return view('Admin.home.login');
@@ -26,23 +34,25 @@ class HomeController extends Controller
         $result=DB::table('admins')->where('email',$email)->where('password',$password)->first();
         if($result){
             Session::put('name',$result->name);
-            Session::put('id',$result->id);
+            Session::put('admin_id',$result->admin_id);
             return redirect()->route('dashboard');
         }else{
             Session::put('message','Email hoặc Mật khẩu bị sai, Vui lòng nhập lại');
-            return Redirect::to('admin/login');
+            return redirect()->route('admin');
         }
 
     }
     public function admin_logout(Request $request){
+        $this->AuthLogin();
         Session::put('name',null);
-        Session::put('id',null);
+        Session::put('admin_id',null);
         return Redirect::to('admin/login');
 
     }
 
     public function dashboard()
     {
+        $this->AuthLogin();
         return view('Admin.home.index');
     }
 

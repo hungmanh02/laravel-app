@@ -9,10 +9,19 @@
 	@include('Client.layouts.header')
     <!--/header-->
 	<!--slider-->
-	@include('Client.layouts.slider')
+	{{-- @include('Client.layouts.slider') --}}
+	@yield('slider')
     <!--/slider-->
 	{{-- content  --}}
-    @yield('content')
+	<section>
+		<div class="container">
+			<div class="row">
+				{{-- @include('Client.layouts.nabar') --}}
+				@yield('nabar')
+   				@yield('content')
+			</div>
+		</div>
+	</section>
 	{{-- /content  --}}
 	
 	<!--Footer-->

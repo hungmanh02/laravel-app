@@ -1,5 +1,5 @@
 @extends('Admin.layouts.app')
-@section('title','List Category')
+@section('title','List product')
 @section('content')
 <div class="table-agile-info">
     <div class="panel panel-default">
@@ -43,26 +43,34 @@
                 </label>
               </th>
               <th>Stt</th>
-              <th>Category Name</th>
-              <th>Status</th>
+              <th>Product Name</th>
+              <th>Product Price</th>
+              <th>Product Image</th>
+              <th>Category</th>
+              <th>Brand</th>
+              <th>Product Status</th>
               <th style="width:30px;"></th>
             </tr>
           </thead>
           <tbody>
-            @foreach ($categories as  $key=>$item)
+            @foreach ($products as  $key=>$item)
             <tr>
               <td><label class="i-checks m-b-none"><input type="checkbox" name="post[]"><i></i></label></td>
               <td>{{ $key+1 }}</td>
+              <td><span class="text-ellipsis">{{ $item->product_name }}</span></td>
+              <td><span class="text-ellipsis">{{ $item->product_price }}</span></td>
+              <td><img src="{{ asset('uploads/product/'.$item->product_image) }}" alt=""  width="60px"></td>
               <td><span class="text-ellipsis">{{ $item->category_name }}</span></td>
+              <td><span class="text-ellipsis">{{ $item->brand_name }}</span></td>
               <td>
-                    @if ($item->category_status==1)
-                    <a href="{{ route('active-category',$item->id) }}"><i class="fa fa-thumbs-down fa-thumb-styling"></i></a>
+                    @if ($item->product_status==1)
+                    <a href="{{ route('active-product',$item->id) }}"><i class="fa fa-thumbs-down fa-thumb-styling"></i></a>
                     @else
-                    <a href="{{ route('unactive-category',$item->id) }}"><i class="fa fa-thumbs-up fa-thumb-styling"></i></a>
+                    <a href="{{ route('unactive-product',$item->id) }}"><i class="fa fa-thumbs-up fa-thumb-styling"></i></a>
                     @endif
               <td>
-                <a href="{{ route('categories.edit',$item->id) }}" class="active styling-icon" ui-toggle-class=""><i class="fa fa-pencil-square-o text-success text-active"></i></a>
-                <form action="{{ route('categories.destroy',$item->id) }}" method="POST">
+                <a href="{{ route('products.edit',$item->id) }}" class="active styling-icon" ui-toggle-class=""><i class="fa fa-pencil-square-o text-success text-active"></i></a>
+                <form action="{{ route('products.destroy',$item->id) }}" method="POST">
                   @csrf
                   @method('DELETE')
                   <button onclick="return confirm('Bạn có chắc xóa danh mục này không  ?')" class="active styling-icon" ui-toggle-class="" type="submit"><i class="fa fa-times text-danger text"></i></button>

@@ -7,7 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 
-class CategoryController extends Controller
+class BrandController extends Controller
 {
     public function AuthLogin(){
         $admin_id=Session::get('admin_id');
@@ -26,8 +26,8 @@ class CategoryController extends Controller
     public function index()
     {
         $this->AuthLogin();
-        $categories=DB::table('categories')->get();
-        return view('Admin.categories.index',['categories'=>$categories]);
+        $brands=DB::table('brands')->get();
+        return view('Admin.brands.index',['brands'=>$brands]);
     }
 
     /**
@@ -38,19 +38,18 @@ class CategoryController extends Controller
     public function create()
     {
         $this->AuthLogin();
-        return view('Admin.categories.create');
+        return view('Admin.brands.create');
     }
 
-    // active status
-    public function active_category_product($id){
+    public function active_brand($id){
         $this->AuthLogin();
-        DB::table('categories')->where('id',$id)->update(['category_status'=>0]);
-        return redirect()->route('categories.index')->with('success','Kích hoạt danh mục thành công');
+        DB::table('brands')->where('id',$id)->update(['brand_status'=>0]);
+        return redirect()->route('brands.index')->with('success','Kích hoạt thương hiệu thành công');
     }
-    public function unactive_category_product($id){
+    public function unactive_brand($id){
         $this->AuthLogin();
-        DB::table('categories')->where('id',$id)->update(['category_status'=>1]);
-        return redirect()->route('categories.index')->with('success','Không kích hoạt danh mục thành công');
+        DB::table('brands')->where('id',$id)->update(['brand_status'=>1]);
+        return redirect()->route('brands.index')->with('success','Không kích hoạt thương hiệu thành công');
     }
     /**
      * Store a newly created resource in storage.
@@ -62,12 +61,12 @@ class CategoryController extends Controller
     {
         $this->AuthLogin();
         $dataCreate=[
-            'category_name'=>$request->category_name,
-            'category_desc'=>$request->category_desc,
-            'category_status'=>$request->category_status,
+            'brand_name'=>$request->brand_name,
+            'brand_desc'=>$request->brand_desc,
+            'brand_status'=>$request->brand_status,
         ];
-        DB::table('categories')->insert($dataCreate);
-        return redirect()->route('categories.index')->with('success','create success');
+        DB::table('brands')->insert($dataCreate);
+        return redirect()->route('brands.index')->with('success','create success');
     }
 
     /**
@@ -90,8 +89,8 @@ class CategoryController extends Controller
     public function edit($id)
     {
         $this->AuthLogin();
-        $category=DB::table('categories')->where('id',$id)->first();
-        return view('Admin.categories.edit',['category'=>$category]);
+        $brand=DB::table('brands')->where('id',$id)->first();
+        return view('Admin.brands.edit',['brand'=>$brand]);
     }
 
     /**
@@ -105,12 +104,12 @@ class CategoryController extends Controller
     {
         $this->AuthLogin();
         $dataUpdate=[
-            'category_name'=>$request->category_name,
-            'category_desc'=>$request->category_desc,
-            'category_status'=>$request->category_status,
+            'brand_name'=>$request->brand_name,
+            'brand_desc'=>$request->brand_desc,
+            'brand_status'=>$request->brand_status,
         ];
-        DB::table('categories')->where('id',$id)->update($dataUpdate);
-        return redirect()->route('categories.index')->with('success','update success');
+        DB::table('brands')->where('id',$id)->update($dataUpdate);
+        return redirect()->route('brands.index')->with('success','update success');
     }
 
     /**
@@ -122,8 +121,8 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $this->AuthLogin();
-        DB::table('categories')->where('id',$id)->delete();
-        return redirect()->route('categories.index')->with('success','delete success');
+        DB::table('brands')->where('id',$id)->delete();
+        return redirect()->route('brands.index')->with('success','delete success');
 
     }
 }

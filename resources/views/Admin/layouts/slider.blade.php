@@ -30,6 +30,16 @@
 						<li><a href="{{ route('brands.index') }}">List Brand</a></li>
                     </ul>
                 </li>
+                <li class="sub-menu">
+                    <a href="javascript:;">
+                        <i class="fa fa-book"></i>
+                        <span>Products</span>
+                    </a>
+                    <ul class="sub">
+						<li><a href="{{ route('products.create') }}">Add Product</a></li>
+						<li><a href="{{ route('products.index') }}">List Product</a></li>
+                    </ul>
+                </li>
             </ul>         
            </div>
         <!-- sidebar menu end-->

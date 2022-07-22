@@ -1,8 +1,5 @@
 @extends('Client.layouts.app')
 @section('title','Home')
-@section('slider')
-    @include('Client.layouts.slider')
-@endsection
 @section('nabar')
     @include('Client.layouts.nabar')
 @endsection
@@ -10,20 +7,18 @@
 <div class="col-sm-9 padding-right">
     <!--features_items-->
         <div class="features_items">
-            <h2 class="title text-center">Features Items</h2>
+            <h2 class="title text-center">{{ $name_brand->brand_name }}</h2>
             @foreach ($products as $product)   
             <div class="col-sm-4">
                 <div class="product-image-wrapper">
-                    <a href="{{ route('product-detail',$product->id) }}">
-                        <div class="single-products">
-                                <div class="productinfo text-center">
-                                    <img src="{{ asset('uploads/product/'.$product->product_image) }}" alt="" />
-                                    <h2>{{ number_format($product->product_price) }}VNĐ</h2>
-                                    <p>{{ $product->product_name }}</p>
-                                    <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
-                                </div>
-                        </div>
-                    </a>
+                    <div class="single-products">
+                            <div class="productinfo text-center">
+                                <img src="{{ asset('uploads/product/'.$product->product_image) }}" alt="" />
+                                <h2>{{ number_format($product->product_price) }}VNĐ</h2>
+                                <p>{{ $product->product_name }}</p>
+                                <a href="#" class="btn btn-default add-to-cart"><i class="fa fa-shopping-cart"></i>Add to cart</a>
+                            </div>
+                    </div>
                     <div class="choose">
                         <ul class="nav nav-pills nav-justified">
                             {{-- Thêm vào danh sách yêu thích --}}
