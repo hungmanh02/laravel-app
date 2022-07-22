@@ -6,8 +6,8 @@
     <div class="container">
         <div class="breadcrumbs">
             <ol class="breadcrumb">
-              <li><a href="#">Home</a></li>
-              <li class="active">Shopping Cart</li>
+              <li><a href="{{ route('index') }}">Trang chủ</a></li>
+              <li class="active">Giỏ hàng của bạn</li>
             </ol>
         </div>
         <div class="table-responsive cart_info">
@@ -131,7 +131,14 @@
                         <li>Thành tiền<span>{{ Cart::total(0, ',' , '.').' '.'vnđ' }}</span></li>
                     </ul>  
                         {{-- <a class="btn btn-default update" href="">Update</a> --}}
-                        <a class="btn btn-default check_out" href="{{ route('login-checkout') }}">Check Out</a>
+                        @php
+                            $customer_id=Session::get('customer_id');
+                        @endphp
+                        @if ($customer_id != NULL)
+                            <a class="btn btn-default check_out" href="{{ route('checkout') }}">Check Out</a>
+                        @else
+                            <a class="btn btn-default check_out" href="{{ route('login-checkout') }}">Check Out</a>
+                        @endif
                 </div>
             </div>
         </div>

@@ -61,8 +61,18 @@
                         <ul class="nav navbar-nav">
                             <li><a href="{{ route('login-checkout') }}"><i class="fa fa-user"></i> Tài khoản</a></li>
                             <li><a href="#"><i class="fa fa-star"></i> Yêu thích</a></li>
-                            <li><a href="checkout.html"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
                             <li><a href="{{ route('show-cart') }}"><i class="fa fa-shopping-cart"></i> Giỏ hàng</a></li>
+                            @php
+                                $customer_id=Session::get('customer_id');
+                            @endphp
+                            @if ($customer_id != NULL)
+                            <li><a href="{{ route('checkout') }}"><i class="fa fa-crosshairs"></i> Thanh toán</a></li>
+
+                                <li><a href="{{ route('logout-checkout') }}"><i class="fa fa-user"></i> Đăng xuất</a></li>
+                            @else
+                                <li><a href="{{ route('login-checkout') }}"><i class="fa fa-user"></i> Đăng nhập</a></li>
+                            @endif
+
                             {{-- <li><a href="login.html"><i class="fa fa-lock"></i> Login</a></li> --}}
                         </ul>
                     </div>

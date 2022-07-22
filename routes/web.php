@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Route;
 
 // client
 Route::prefix('')->group(function () {
-    Route::get('','Client\HomeController@index');
+    Route::get('','Client\HomeController@index')->name('index');
     // danh mục sản phẩm trang home
     Route::get('category-product/{id}','Client\HomeController@category_product');
     // thương hiệu sản phẩm trang home
@@ -31,8 +31,10 @@ Route::prefix('')->group(function () {
     //checkout
     Route::get('checkout','Client\CheckoutController@checkout')->name('checkout');
     Route::get('login-checkout','Client\CheckoutController@login_checkout')->name('login-checkout');
+    Route::get('logout-checkout','Client\CheckoutController@logout_checkout')->name('logout-checkout');
     Route::post('add-customer','Client\CheckoutController@add_customer')->name('add-customer');
     Route::post('login-customer','Client\CheckoutController@login_customer')->name('login-customer');
+    Route::post('save-checkout','Client\CheckoutController@save_checkout')->name('save-checkout');
 
 });
 // admin

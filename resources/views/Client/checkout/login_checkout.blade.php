@@ -11,8 +11,8 @@
                     <h2>Đăng nhập tài khoản</h2>
                     <form action="{{ route('login-customer') }}" method="POST">
                         @csrf
-                        <input type="email" placeholder="tài khoản" />
-                        <input type="password" placeholder="Mật khẩu" />
+                        <input type="email" placeholder="tài khoản" name="customer_email"/>
+                        <input type="password" placeholder="Mật khẩu" name="customer_password"/>
                         <span>
                             <input type="checkbox" class="checkbox"> 
                             Ghi nhớ đăng nhập
